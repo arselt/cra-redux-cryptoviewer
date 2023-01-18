@@ -1,5 +1,11 @@
+import Header from "./components/Header";
+
 function App() {
-  return <div className="text-3xl font-bold underline">Hello, Arselt Cryptoview!</div>;
+  return (
+    <div className="font-Chivo bg-zinc-100">
+      <Header />
+    </div>
+  );
 }
 
 export default App;
