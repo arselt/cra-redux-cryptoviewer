@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { setCryptos as setCryptosActions } from "./actions";
 import getCrypto from "./api";
 import CryptoList from "./components/CryptoList";
 import Header from "./components/Header";
 
-function App() {
-  const [cryptos, setCryptos] = useState([]);
-
+function App({ cryptos, setCryptos }) {
   useEffect(() => {
     const fetchCryptos = async () => {
       const cryptosRes = await getCrypto();
@@ -23,4 +23,12 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  cryptos: state.cryptos
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCryptos: (value) => dispatch(setCryptosActions(value))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
