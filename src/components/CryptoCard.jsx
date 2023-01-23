@@ -6,10 +6,14 @@ const CryptoCard = ({ cryptoName, cryptoValue, cryptoTicker, cryptoChangeDay, cr
         <h3 className="text-2xl capitalize ml-2">{cryptoName}</h3>
       </div>
       <div className="flex items-end text-end flex-col">
-        <span className="text-base uppercase ">
+        <span className="text-base uppercase">
           {cryptoValue} {cryptoTicker}
         </span>
-        <span className="text-sm uppercase text-emerald-600">{cryptoChangeDay}</span>
+        <span className={`text-sm uppercase 
+          ${cryptoChangeDay >= 0  ? 'text-emerald-600' : 'text-rose-500'}
+        `}>
+          {cryptoChangeDay >= 0 ? `+${cryptoChangeDay.toFixed(2)}` : cryptoChangeDay.toFixed(3)}%
+        </span>
       </div>
     </div>
   );
