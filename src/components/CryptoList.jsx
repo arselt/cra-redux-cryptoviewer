@@ -10,7 +10,7 @@ const CryptoList = ({ cryptos }) => {
             cryptoName={cryptos.name}
             cryptoValue={cryptos.market_data.current_price.mxn}
             cryptoTicker="mxn"
-            cryptoChangeDay={cryptos.market_data.market_cap_change_percentage_24h}
+            cryptoChangeDay={cryptos.market_data.price_change_percentage_24h_in_currency.mxn}
             cryptoImage={cryptos.image.small}
           />
         );

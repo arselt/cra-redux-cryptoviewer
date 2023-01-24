@@ -1,6 +1,13 @@
 const CryptoCard = ({ cryptoName, cryptoValue, cryptoTicker, cryptoChangeDay, cryptoImage }) => {
+  
+  const handleClick = () => console.log('hola')
+  // TODO: Handle description of individual coin when onClick event
+  
   return (
-    <div className="bg-zinc-200 flex items-center justify-between w-full min-w-{280} max-w-sm h-20 px-2 rounded-2xl shadow-xl">
+    <div 
+      onClick={() => handleClick()}
+      className="bg-zinc-200 flex items-center justify-between w-full min-w-{280} max-w-sm h-20 px-2 rounded-2xl shadow-xl"
+    >
       <div className="flex items-center">
         <img src={cryptoImage} alt="" className="w-8 h-8" />
         <h3 className="text-2xl capitalize ml-2">{cryptoName}</h3>

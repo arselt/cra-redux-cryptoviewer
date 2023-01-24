@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCryptos } from "./actions";
-import getCrypto from "./api";
+import { getCrypto } from "./api";
 import CryptoList from "./components/CryptoList";
 import Header from "./components/Header";
 
@@ -17,6 +17,8 @@ function App() {
     };
 
     fetchCryptos();
+    const intervalId = setInterval(fetchCryptos, 120000);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (

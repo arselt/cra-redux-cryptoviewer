@@ -1,11 +1,22 @@
 import axios from "axios";
 
-const getCrypto = async () => {
-  // return axios.get('https://api.coingecko.com/api/v3/coins/')
-  // .then(res => res.data)
-  // .then(err => console.log(err))
-  const { data } = await axios.get("https://api.coingecko.com/api/v3/coins/");
-  return data;
+const API = "https://api.coingecko.com/api/v3/coins/";
+
+export const getCrypto = async () => {
+  try {
+    const { data } = await axios.get(API);
+    return data;
+  } catch (error) {
+    return console.log(error)
+  }
 };
 
-export default getCrypto;
+
+export const getCryptoDetails = async (crypto) => {
+  try {
+    const { addData } = await axios.get(`${API}${crypto.id}/`)
+    return addData;    
+  } catch (error) {
+    return console.log(error)
+  }
+}
