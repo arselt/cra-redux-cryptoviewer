@@ -11,10 +11,9 @@ export const getCrypto = async () => {
   }
 };
 
-
 export const getCryptoDetails = async (crypto) => {
   try {
-    const { addData } = await axios.get(`${API}${crypto.id}/`)
+    const { addData } = await axios.get(`${API}${crypto}/`)
     return addData;    
   } catch (error) {
     return console.log(error)

@@ -7,6 +7,7 @@ const CryptoList = ({ cryptos }) => {
         return (
           <CryptoCard
             key={cryptos.id}
+            cryptoId={cryptos.id}
             cryptoName={cryptos.name}
             cryptoValue={cryptos.market_data.current_price.mxn}
             cryptoTicker="mxn"
