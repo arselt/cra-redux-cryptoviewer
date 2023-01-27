@@ -1,19 +1,7 @@
 import { useState } from "react";
 import CryptoDetailsCard from "./CryptoDetailsCard";
-// import { getCryptoDetails } from "../api";
 
 const CryptoCard = ({ cryptoId, cryptoName, cryptoValue, cryptoTicker, cryptoChangeDay, cryptoImage }) => {  
-  // const dispatch = useDispatch();
-
-  // TODO: Handle description of individual coin when onClick event
-  // const handleClick = async () => {
-  //   const fetchCryptos = async () => {
-  //     const cryptosRes = await getCryptoDetails(cryptoId);
-  //     return cryptosRes;
-  //   };
-
-  //   await fetchCryptos();
-  // }
   
   const [isShown, setIsShown] = useState(false);
 
