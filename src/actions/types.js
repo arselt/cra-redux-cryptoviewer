@@ -1,1 +1,2 @@
 export const SET_CRYPTOS = "SET_CRYPTOS";
+export const SET_CRYPTO_DETAILS = "SET_CRYPTO_DETAILS";

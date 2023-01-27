@@ -1,23 +1,28 @@
 import { getCryptoDetails } from "../api";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCryptoDetails } from "../actions";
 
 const CryptoDetailsCard = ({cryptoId}) => {
+  const cryptoDetails = useSelector(state => state.cryptoDetails)
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-      const fetchCryptos = async () => {
-        const cryptosDetailRes = await getCryptoDetails(cryptoId);
+  useEffect(() => {
+    const fetchCryptos = async () => {
+      const cryptosDetailRes = await getCryptoDetails(cryptoId);
+      dispatch(setCryptoDetails(cryptosDetailRes));
+    };
+    fetchCryptos();
+  }, [])
 
-        return await cryptosDetailRes;
-      };
-
-      fetchCryptos();
-    }, [])
-    
-    return (
-        <div className="w-full flex justify-center content-center items-center h-32">
-            Hola
-        </div>
-    )
+  return (
+    <div className="w-full flex justify-center content-center items-center h-32">
+      <p className="px-4">
+        {cryptoDetails.last_updated}
+      </p>
+    </div>
+  )
 }
+
 
 export default CryptoDetailsCard;
