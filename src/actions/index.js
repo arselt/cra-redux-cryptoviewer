@@ -5,7 +5,10 @@ export const setCryptos = (payload) => ({
   payload
 });
 
-export const setCryptoDetails = (payload) => ({
-  type: SET_CRYPTO_DETAILS,
-  payload
-});
+export const setCryptoDetails = (cryptoId, details) => {
+  return {
+    type: SET_CRYPTO_DETAILS,
+    cryptoId,
+    payload: details
+  };
+};

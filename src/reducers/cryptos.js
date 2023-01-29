@@ -1,7 +1,8 @@
 import { SET_CRYPTOS, SET_CRYPTO_DETAILS } from "../actions/types";
 
 const initialState = {
-  cryptos: []
+  cryptos: [],
+  cryptoDetails: {}
 };
 
 export const cryptosReducer = (state = initialState, action) => {
@@ -9,7 +10,10 @@ export const cryptosReducer = (state = initialState, action) => {
     case SET_CRYPTOS:
       return { ...state, cryptos: action.payload };
     case SET_CRYPTO_DETAILS:
-      return { ...state, cryptoDetails: action.payload };
+      return {
+        ...state,
+        cryptoDetails: { ...state.cryptoDetails, [action.cryptoId]: action.payload }
+      };
     default:
       return state;
   }

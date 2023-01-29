@@ -7,15 +7,15 @@ export const getCrypto = async () => {
     const { data } = await axios.get(API);
     return data;
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
 };
 
 export const getCryptoDetails = async (crypto) => {
   try {
-    const {data} = await axios.get(`${API}${crypto}/`)
-    return data;    
+    const { data } = await axios.get(`${API}${crypto}/`);
+    return data;
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};

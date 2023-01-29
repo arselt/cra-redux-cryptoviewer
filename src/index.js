@@ -14,10 +14,7 @@ const composedEnhancers = compose(
   applyMiddleware(logger)
 );
 
-const store = createStore(
-  cryptosReducer,
-  composedEnhancers
-);
+const store = createStore(cryptosReducer, composedEnhancers);
 
 root.render(
   <Provider store={store}>

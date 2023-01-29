@@ -6,8 +6,7 @@ import CryptoList from "./components/CryptoList";
 import Header from "./components/Header";
 
 function App() {
-
-  const cryptos = useSelector(state => state.cryptos);
+  const cryptos = useSelector((state) => state.cryptos);
   const dispatch = useDispatch();
 
   useEffect(() => {
