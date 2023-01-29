@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header className="bg-zinc-900 h-14 rounded-b-xl">
+    <header className="bg-zinc-900 h-14 rounded-b-xl w-full xl:max-w-7xl">
       <nav className="flex justify-between items-center py-2 px-4 text-zinc-200">
         <a href="/">
           <h1 className="text-3xl">Cryptoviewer</h1>

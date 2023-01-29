@@ -19,7 +19,7 @@ const CryptoDetailsCard = ({ cryptoId }) => {
   }, [cryptoId]);
 
   return (
-    <div className="w-full flex justify-center content-center items-center h-32">
+    <div className="flex w-full max-w-sm justify-center content-center items-center h-32">
       <p className="px-4">
         {loading ? "Loading" : cryptoDetails.description.en.substring(0, 160)}...
       </p>
