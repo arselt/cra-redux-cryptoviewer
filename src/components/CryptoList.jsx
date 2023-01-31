@@ -2,7 +2,7 @@ import CryptoCard from "./CryptoCard";
 
 const CryptoList = ({ cryptos }) => {
   return (
-    <main className="justify-items-center mt-5 px-6 gap-8 pb-5 lg:grid-cols-3 lg:max-w-7xl lg:columns-3">
+    <main className="justify-items-center mt-5 px-6 gap-8 pb-5 sm:columns-2 lg:max-w-7xl lg:columns-3">
       {cryptos.map((cryptos) => {
         return (
           <CryptoCard
