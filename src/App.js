@@ -21,7 +21,7 @@ function App() {
   }, []);
 
   return (
-    <div className="font-Chivo bg-zinc-100 flex flex-col items-center">
+    <div className="font-Chivo bg-zinc-100 grid place-content-center">
       <Header />
       <CryptoList cryptos={cryptos} />
     </div>
