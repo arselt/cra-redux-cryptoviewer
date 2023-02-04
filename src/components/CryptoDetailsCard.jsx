@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCryptoDetails } from "../actions";
 
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 const CryptoDetailsCard = ({ cryptoId }) => {
   const cryptoDetails = useSelector((state) => state.cryptoDetails[cryptoId]);
   const [loading, setLoading] = useState(true);
@@ -19,11 +22,21 @@ const CryptoDetailsCard = ({ cryptoId }) => {
   }, [cryptoId]);
 
   return (
-    <div className="flex w-full max-w-sm justify-center content-center items-center h-32">
-      <div className="px-4 break-all">
-        {loading ? "Loading" : cryptoDetails.description.en.substring(0, 160)}...
+    <SkeletonTheme baseColor="#f4f4f5" highlightColor="#fafafa">
+      <div className="flex w-full max-w-sm h-52">
+        <div className="p-4 w-full text-justify break-all">
+          {loading ? (
+            <Skeleton count={7} />
+          ) : (
+            `${
+              cryptoDetails.description.en === ""
+                ? "Error: No available data"
+                : cryptoDetails.description.en.substring(0, 264)
+            }`
+          )}
+        </div>
       </div>
-    </div>
+    </SkeletonTheme>
   );
 };
 
