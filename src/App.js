@@ -1,18 +1,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCryptos } from "./actions";
+import { setCryptos, setLoading } from "./actions";
 import { getCrypto } from "./api";
 import CryptoList from "./components/CryptoList";
 import Header from "./components/Header";
 
 function App() {
   const cryptos = useSelector((state) => state.cryptos);
+  const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCryptos = async () => {
+      dispatch(setLoading(true));
       const cryptosRes = await getCrypto();
       dispatch(setCryptos(cryptosRes));
+      dispatch(setLoading(false))
     };
 
     fetchCryptos();
@@ -23,7 +26,7 @@ function App() {
   return (
     <div className="font-Chivo bg-zinc-100 grid place-content-center">
       <Header />
-      <CryptoList cryptos={cryptos} />
+      {loading ? "loading" : <CryptoList cryptos={cryptos} />}
     </div>
   );
 }
