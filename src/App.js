@@ -7,26 +7,29 @@ import Header from "./components/Header";
 
 function App() {
   const cryptos = useSelector((state) => state.cryptos);
-  const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
+
+  // const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
     const fetchCryptos = async () => {
       dispatch(setLoading(true));
       const cryptosRes = await getCrypto();
       dispatch(setCryptos(cryptosRes));
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
     };
 
     fetchCryptos();
-    const intervalId = setInterval(fetchCryptos, 120000);
-    return () => clearInterval(intervalId);
+    // const intervalId = setInterval(fetchCryptos, 120000);
+    // return () => clearInterval(intervalId);
   }, []);
 
   return (
     <div className="font-Chivo bg-zinc-100 grid place-content-center">
       <Header />
-      {loading ? "loading" : <CryptoList cryptos={cryptos} />}
+      {/* {loading ? "loading" : <CryptoList cryptos={cryptos} />} */}
+      {/* <CryptoList cryptos={cryptos} loading={loading} /> */}
+      <CryptoList cryptos={cryptos} />
     </div>
   );
 }

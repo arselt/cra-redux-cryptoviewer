@@ -22,7 +22,7 @@ const CryptoCard = ({
     >
       <div className="flex items-center justify-between w-full max-w-sm h-20 shadow-lg rounded-2xl px-2">
         <div className="flex items-center">
-          <img src={cryptoImage} alt="" className="w-8 h-8" />
+          <img src={cryptoImage} alt="" className="w-6 h-6" />
           <h3 className="text-2xl capitalize ml-2">{cryptoName}</h3>
         </div>
         <div className="flex items-end text-end flex-col">

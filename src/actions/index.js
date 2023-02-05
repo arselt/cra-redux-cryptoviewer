@@ -15,5 +15,5 @@ export const setCryptoDetails = (cryptoId, details) => {
 
 export const setLoading = (payload) => ({
   type: SET_LOADING,
-  payload,
+  payload
 });

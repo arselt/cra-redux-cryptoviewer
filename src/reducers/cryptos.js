@@ -15,8 +15,8 @@ export const cryptosReducer = (state = initialState, action) => {
         ...state,
         cryptoDetails: { ...state.cryptoDetails, [action.cryptoId]: action.payload }
       };
-      case SET_LOADING:
-        return {...state, loading: action.payload };
+    case SET_LOADING:
+      return { ...state, loading: action.payload };
     default:
       return state;
   }
