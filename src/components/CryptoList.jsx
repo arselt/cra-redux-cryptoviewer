@@ -6,17 +6,12 @@ const CryptoList = ({ cryptos }) => {
   const loading = useSelector((state) => state.loading);
 
   return (
-    <main className="justify-items-center mt-5 px-6 gap-8 pb-5 sm:columns-2 lg:max-w-7xl lg:columns-3">
+    <main className="justify-items-center mt-5 px-6 gap-8 pb-5 sm:columns-2 lg:max-w-7xl lg:columns-3 w-screen">
       {loading
         ? Array(30)
             .fill(true)
             .map((_, i) => (
-              <Skeleton
-                width={384}
-                height={80}
-                key={i}
-                className={"w-full max-w-sm rounded-2xl shadow-xl mb-6"}
-              />
+              <Skeleton key={i} className={"w-max max-w-sm rounded-2xl shadow-xl mb-6 h-20"} />
             ))
         : cryptos.map((cryptos) => {
             // {cryptos.map((cryptos) => {
@@ -29,7 +24,7 @@ const CryptoList = ({ cryptos }) => {
                 cryptoTicker="mxn"
                 cryptoChangeDay={cryptos.market_data.price_change_percentage_24h_in_currency.mxn}
                 cryptoImage={cryptos.image.thumb}
-                className="w-full max-w-sm rounded-2xl shadow-xl mb-6"
+                className="w-max max-w-sm rounded-2xl shadow-xl mb-6 h-20"
               />
             );
           })}
