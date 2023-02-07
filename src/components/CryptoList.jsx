@@ -6,12 +6,14 @@ const CryptoList = ({ cryptos }) => {
   const loading = useSelector((state) => state.loading);
 
   return (
-    <main className="justify-items-center mt-5 px-6 gap-8 pb-5 sm:columns-2 lg:max-w-7xl lg:columns-3 w-screen">
+    <main className="mt-5 px-6 gap-8 pb-5 sm:columns-2 sm:max-w-3xl lg:max-w-7xl lg:columns-3 mx-auto">
       {loading
         ? Array(30)
             .fill(true)
             .map((_, i) => (
-              <Skeleton key={i} className={"w-max max-w-sm rounded-2xl shadow-xl mb-6 h-20"} />
+              <div key={i} className="max-w-sm mx-auto">
+                <Skeleton borderRadius="16px" className={"w-max rounded-2xl shadow-xl mb-6 h-20"} />
+              </div>
             ))
         : cryptos.map((cryptos) => {
             // {cryptos.map((cryptos) => {

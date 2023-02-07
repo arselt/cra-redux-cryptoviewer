@@ -18,7 +18,7 @@ const CryptoCard = ({
   return (
     <article
       onClick={handleClick}
-      className="break-inside-avoid-column bg-zinc-200 flex flex-wrap w-full max-w-sm rounded-2xl shadow-xl mb-6 cursor-pointer"
+      className="break-inside-avoid-column bg-zinc-200 flex flex-wrap w-full max-w-sm rounded-2xl shadow-xl mb-6 cursor-pointer mx-auto"
     >
       <div className="flex items-center justify-between w-full max-w-sm h-20 shadow-lg rounded-2xl px-2">
         <div className="flex items-center">

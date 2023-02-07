@@ -25,7 +25,7 @@ function App() {
   }, []);
 
   return (
-    <div className="font-Chivo bg-zinc-100 grid place-content-center">
+    <div className="font-Chivo bg-zinc-100">
       <Header />
       {/* {loading ? "loading" : <CryptoList cryptos={cryptos} />} */}
       {/* <CryptoList cryptos={cryptos} loading={loading} /> */}
