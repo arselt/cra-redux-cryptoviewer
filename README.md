@@ -1,8 +1,14 @@
 # 🪙 Arselt Cryptoviewer
 
-### A react.js and redux app for tracking crypto prices
+### A react.js with redux app for tracking crypto prices
+
+![App UI thumbnail](/thumbnail.jpg "UI Screenshot")
 
 ⚛️ This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), [Redux](https://es.redux.js.org/) and [TailwindCSS](https://tailwindcss.com/)
+
+## Deploy
+
+### [🚀 Deploy: arselt-cryptoviewer.netlify.app](https://arselt-cryptoviewer.netlify.app/)
 
 ## Setup
 
