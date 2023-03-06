@@ -5,6 +5,7 @@ import { setCryptoDetails } from "../actions";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import IconStar from "./IconStar";
 
 const CryptoDetailsCard = ({ cryptoId }) => {
   const cryptoDetails = useSelector((state) => state.cryptoDetails[cryptoId]);
@@ -24,6 +25,7 @@ const CryptoDetailsCard = ({ cryptoId }) => {
   return (
     <SkeletonTheme baseColor="#f4f4f5" highlightColor="#fafafa">
       <div className="flex w-full max-w-sm h-52">
+        <IconStar isFavorite={false} onClick={() => console.log("click")} />
         <div className="p-4 w-full text-justify break-all">
           {loading ? (
             <Skeleton count={7} />
