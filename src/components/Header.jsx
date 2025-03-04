@@ -5,7 +5,7 @@ const Header = () => {
         <a href="/">
           <h1 className="text-3xl">Cryptoviewer</h1>
         </a>
-        <div className="bg-zinc-200 text-md text-zinc-900 rounded-xl px-2 py-1">MXN</div>
+        <div className="bg-zinc-200 text-md text-zinc-900 rounded-xl px-2 py-1">USD</div>
       </nav>
     </header>
   );

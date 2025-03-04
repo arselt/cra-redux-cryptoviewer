@@ -8,7 +8,7 @@ const CryptoCard = ({
   cryptoValue,
   cryptoTicker,
   cryptoChangeDay,
-  cryptoImage
+  // cryptoImage
 }) => {
   const [isShown, setIsShown] = useState(false);
 
@@ -21,20 +21,20 @@ const CryptoCard = ({
     <article className="break-inside-avoid-column bg-zinc-200 flex flex-wrap w-full max-w-sm rounded-2xl shadow-xl mb-6 mx-auto">
       <div className="flex items-center justify-between w-full max-w-sm h-20 shadow-lg rounded-2xl px-2">
         <div className="flex items-center">
-          <img src={cryptoImage} alt="" className="w-6 h-6" />
+          {/* <img src={cryptoImage} alt="" className="w-6 h-6" /> */}
           <h3 className="text-2xl capitalize ml-2">{cryptoName}</h3>
         </div>
         <div className="flex items-center text-end">
           <div className="flex flex-col mr-2">
             <span className="text-base uppercase">
-              {cryptoValue} {cryptoTicker}
+              {cryptoValue.toFixed(3)} {cryptoTicker}
             </span>
             <span
               className={`text-sm uppercase 
               ${cryptoChangeDay >= 0 ? "text-emerald-600" : "text-rose-500"}
               `}
             >
-              {cryptoChangeDay >= 0 ? `+${cryptoChangeDay.toFixed(2)}` : cryptoChangeDay.toFixed(3)}
+              {cryptoChangeDay >= 0 ? `+${cryptoChangeDay.toFixed(2)}` : cryptoChangeDay.toFixed(2)}
               %
             </span>
           </div>

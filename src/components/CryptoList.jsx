@@ -15,18 +15,18 @@ const CryptoList = ({ cryptos }) => {
                 <Skeleton borderRadius="16px" className={"w-max rounded-2xl shadow-xl mb-6 h-20"} />
               </div>
             ))
-        : cryptos.map((cryptos) => {
+        : cryptos.slice(0, 100).map((cryptos) => {
             // {cryptos.map((cryptos) => {
             return (
               <CryptoCard
-                key={cryptos.id}
-                cryptoId={cryptos.id}
-                cryptoName={cryptos.name}
-                cryptoValue={cryptos.market_data.current_price.mxn}
-                cryptoTicker="mxn"
-                cryptoChangeDay={cryptos.market_data.price_change_percentage_24h_in_currency.mxn}
-                cryptoImage={cryptos.image.thumb}
-                className="w-max max-w-sm rounded-2xl shadow-xl mb-6 h-20"
+              key={cryptos.id}
+              cryptoId={cryptos.id}
+              cryptoName={cryptos.name}
+              cryptoValue={cryptos.quotes.USD.price}
+              cryptoTicker="USD"
+              cryptoChangeDay={cryptos.quotes.USD.percent_change_24h}
+              // cryptoImage={cryptos.image.thumb}
+              className="w-max max-w-sm rounded-2xl shadow-xl mb-6 h-20"
               />
             );
           })}

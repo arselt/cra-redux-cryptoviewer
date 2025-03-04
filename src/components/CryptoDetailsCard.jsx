@@ -31,9 +31,9 @@ const CryptoDetailsCard = ({ cryptoId }) => {
             <Skeleton count={7} />
           ) : (
             `${
-              cryptoDetails.description.en === ""
+              cryptoDetails.description === ""
                 ? "Error: No available data"
-                : cryptoDetails.description.en.substring(0, 264)
+                : cryptoDetails.description.substring(0, 264)
             }`
           )}
         </div>
