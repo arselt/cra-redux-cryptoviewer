@@ -24,7 +24,7 @@ const CryptoDetailsCard = ({ cryptoId }) => {
 
   return (
     <SkeletonTheme baseColor="#f4f4f5" highlightColor="#fafafa">
-      <div className="flex w-full max-w-sm h-52">
+      <div className="flex w-full h-[228px]">
         <IconStar isFavorite={false} onClick={() => console.log("click")} />
         <div className="p-4 w-full text-justify break-all">
           {loading ? (
