@@ -7,6 +7,8 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import IconStar from "./IconStar";
 
+import CryptoPriceChart from "./CryptoPriceChart";
+
 const CryptoDetailsCard = ({ cryptoId }) => {
   const cryptoDetails = useSelector((state) => state.cryptoDetails[cryptoId]);
   const [loading, setLoading] = useState(true);
@@ -24,18 +26,17 @@ const CryptoDetailsCard = ({ cryptoId }) => {
 
   return (
     <SkeletonTheme baseColor="#f4f4f5" highlightColor="#fafafa">
-      <div className="flex w-full h-[228px]">
-        <IconStar isFavorite={false} onClick={() => console.log("click")} />
-        <div className="p-4 w-full text-justify break-all">
-          {loading ? (
-            <Skeleton count={7} />
-          ) : (
-            `${
-              cryptoDetails.description.en === ""
-                ? "Error: No available data"
-                : cryptoDetails.description.en.substring(0, 280) + "..."
-            }`
-          )}
+      <div className="flex w-full h-[228px] p-4">
+        <div className="w-full h-full">
+          {
+            loading ? 
+            <Skeleton borderRadius="16px" className={"rounded-2xl shadow-xl mb-6 w-full h-full"}/> : 
+            <CryptoPriceChart 
+              prices={cryptoDetails.prices} 
+              graphColor={"#52525b"}
+            />
+          }
+          <IconStar isFavorite={false} onClick={() => console.log("click")} />
         </div>
       </div>
     </SkeletonTheme>

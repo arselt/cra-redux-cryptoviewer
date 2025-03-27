@@ -20,20 +20,18 @@ export const getCrypto = async () => {
     })
     return data;
   } catch (error) {
-    console.error('Error fetching crypto data:', error);
-    throw error;
+    console.error('Error fetching crypto data:', error.message);
+    throw error.message;
   }
 };
 
 export const getCryptoDetails = async (crypto) => {
   try {
-    // const { data } = await axios.get(`${API}coins/${crypto}/`);
-
-    const { data } = await api.get(`/coins/${crypto}`)
+    const { data } = await api.get(`/coins/${crypto}/market_chart?vs_currency=usd&days=30&interval=daily&precision=6`)
     console.log(data)
     return data;
   } catch (error) {
-    console.error('Error fetching crypto detail data:', error);
-    throw error;
+    console.error('Error fetching crypto detail data:', error.message);
+    throw error.message;
   }
 };

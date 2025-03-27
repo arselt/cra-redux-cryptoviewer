@@ -26,7 +26,7 @@ const CryptoCard = ({
         <div className="flex items-center text-end">
           <div className="flex flex-col mr-2">
             <span className="text-base uppercase">
-              {cryptoValue.toFixed(3)} {cryptoTicker}
+              {cryptoValue} {cryptoTicker}
             </span>
             <span
               className={`text-sm uppercase 
