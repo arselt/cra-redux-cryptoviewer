@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCryptos, setLoading } from "./actions";
+
 import { getCrypto } from "./api";
+
 import CryptoList from "./components/CryptoList";
 import Header from "./components/Header";
 

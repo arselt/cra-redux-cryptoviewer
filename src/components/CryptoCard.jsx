@@ -7,12 +7,12 @@ const CryptoCard = ({
   cryptoName,
   cryptoValue,
   cryptoTicker,
-  cryptoChangeDay
+  cryptoChangeDay,
+  cryptoImage
 }) => {
   const [isShown, setIsShown] = useState(false);
 
   const handleClick = () => {
-    console.log("click");
     setIsShown((current) => !current);
   };
 
@@ -20,7 +20,7 @@ const CryptoCard = ({
     <article className="break-inside-avoid-column bg-zinc-200 flex flex-wrap w-full md:max-w-sm rounded-2xl shadow-xl mb-6 mx-auto mx-2">
       <div className="flex items-center justify-between w-full h-20 shadow-lg rounded-2xl px-2">
         <div className="flex items-center">
-          <img src={`https://static.coinpaprika.com/coin/${cryptoId}/logo.png`} alt="" className="w-6 h-6" />
+          <img src={cryptoImage} alt="" className="w-6 h-6" />
           <h3 className="text-2xl capitalize ml-2">{cryptoName}</h3>
         </div>
         <div className="flex items-center text-end">
