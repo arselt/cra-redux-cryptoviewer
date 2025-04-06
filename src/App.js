@@ -11,8 +11,6 @@ function App() {
   const cryptos = useSelector((state) => state.cryptos);
   const dispatch = useDispatch();
 
-  // const loading = useSelector((state) => state.loading);
-
   useEffect(() => {
     const fetchCryptos = async () => {
       dispatch(setLoading(true));
@@ -22,15 +20,11 @@ function App() {
     };
 
     fetchCryptos();
-    // const intervalId = setInterval(fetchCryptos, 120000);
-    // return () => clearInterval(intervalId);
   }, []);
 
   return (
     <div className="font-Chivo bg-zinc-100">
       <Header />
-      {/* {loading ? "loading" : <CryptoList cryptos={cryptos} />} */}
-      {/* <CryptoList cryptos={cryptos} loading={loading} /> */}
       <CryptoList cryptos={cryptos} />
     </div>
   );
