@@ -26,7 +26,10 @@ function App() {
     <div className="font-Chivo bg-zinc-100">
       <Header />
       <main>
-        <CryptoList cryptos={cryptos} />
+        {cryptos.filter(crypto => crypto.favorite).length >= 1 ?
+          <CryptoList title={"Favorites"} cryptos={cryptos.filter(crypto => crypto.favorite)} /> : null
+        }
+        <CryptoList title={"Cryptocurrencies by marketcap"} cryptos={cryptos} />
       </main>
     </div>
   );
