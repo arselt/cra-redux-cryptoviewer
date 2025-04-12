@@ -8,7 +8,7 @@ import CryptoList from "./components/CryptoList";
 import Header from "./components/Header";
 
 function App() {
-  const cryptos = useSelector((state) => state.cryptos);
+  const cryptos = useSelector((state) => state.cryptos.cryptos);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +25,9 @@ function App() {
   return (
     <div className="font-Chivo bg-zinc-100">
       <Header />
-      <CryptoList cryptos={cryptos} />
+      <main>
+        <CryptoList cryptos={cryptos} />
+      </main>
     </div>
   );
 }

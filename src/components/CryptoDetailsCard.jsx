@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 const CryptoPriceChart = lazy(() => import("./CryptoPriceChart"));
 
 const CryptoDetailsCard = ({ cryptoId }) => {
-  const cryptoDetails = useSelector((state) => state.cryptoDetails[cryptoId]);
+  const cryptoDetails = useSelector((state) => state.cryptos.cryptoDetails[cryptoId]);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,6 +1,6 @@
-const StarIcon = (isFavorite, onClick) => {
-  const favoriteColor = isFavorite ? "text-zinc-400" : "text-amber-200";
-  return <button className={`text-2xl leading-none ${favoriteColor}`} onClick={() => onClick}> ★ </button>;
+const StarIcon = ({ onClick, isFavorite }) => {
+  const favoriteColor = isFavorite ? "text-amber-500" : "text-zinc-400";
+  return <button className={`text-2xl leading-none pt-1 ${favoriteColor}`} onClick={onClick}> ✶ </button>;
 };
 
 export default StarIcon;

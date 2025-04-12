@@ -2,6 +2,8 @@ import { useState } from "react";
 import CryptoDetailsCard from "./CryptoDetailsCard";
 import IconArrow from "./IconArrow";
 import IconStar from "./IconStar";
+import { useDispatch } from "react-redux";
+import { setFavorite } from "../actions";
 
 const CryptoCard = ({
   cryptoId,
@@ -9,14 +11,22 @@ const CryptoCard = ({
   cryptoValue,
   cryptoTicker,
   cryptoChangeDay,
-  cryptoImage
+  cryptoImage,
+  cryptoFavorite
 }) => {
+  const dispatch = useDispatch();
   const [isShown, setIsShown] = useState(false);
 
-  const handleClick = () => {
+  const handleDetailClick = () => {
     setIsShown((current) => !current);
   };
 
+  const handleFavoriteClick = () => {
+    dispatch(setFavorite({ cryptoId: cryptoId }))
+  }
+
+  cryptoChangeDay == null || undefined ? cryptoChangeDay = 0: cryptoChangeDay;
+  
   return (
     <article className="break-inside-avoid-column bg-zinc-200 flex flex-wrap w-full md:max-w-sm rounded-2xl shadow-xl mb-6 mx-auto mx-2">
       <div className="flex items-center justify-between w-full h-20 shadow-lg rounded-2xl px-2">
@@ -39,8 +49,8 @@ const CryptoCard = ({
             </span>
           </div>
           <div className="flex flex-col">
-            <IconStar isFavorite={false} onClick={() => console.log("click")} />
-            <IconArrow onClick={handleClick} isShown={isShown} />
+            <IconStar onClick={handleFavoriteClick} isFavorite={cryptoFavorite}/>
+            <IconArrow onClick={handleDetailClick} isShown={isShown} />
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ export const getCrypto = async () => {
       params: {
         vs_currency: 'usd',
         order: 'market_cap_desc',
-        per_page: 100,
+        per_page: 99,
         page: 1,
         sparkline: false
       }
@@ -25,9 +25,9 @@ export const getCrypto = async () => {
   }
 };
 
-export const getCryptoDetails = async (crypto) => {
+export const getCryptoDetails = async (cryptoItem) => {
   try {
-    const { data } = await api.get(`/coins/${crypto}/market_chart?vs_currency=usd&days=30&interval=daily&precision=6`)
+    const { data } = await api.get(`/coins/${cryptoItem}/market_chart?vs_currency=usd&days=30&interval=daily&precision=6`)
     return data;
   } catch (error) {
     console.error('Error fetching crypto detail data:', error.message);

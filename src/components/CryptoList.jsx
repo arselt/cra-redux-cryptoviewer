@@ -6,11 +6,11 @@ import Skeleton from "react-loading-skeleton";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
 const CryptoList = ({ cryptos }) => {
-  const loading = useSelector((state) => state.loading);
+  const loading = useSelector((state) => state.cryptos.loading);
 
   console.log(cryptos);
   return (
-    <main className="mt-5 px-6 gap-8 pb-5 lg:max-w-7xl mx-auto">
+    <section className="mt-5 px-6 gap-8 pb-5 lg:max-w-7xl mx-auto">
       { loading ? 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Array(30)
@@ -32,6 +32,7 @@ const CryptoList = ({ cryptos }) => {
                   cryptoTicker="USD"
                   cryptoChangeDay={cryptos.price_change_percentage_24h}
                   cryptoImage={cryptos.image}
+                  cryptoFavorite={cryptos.favorite}
                   className="w-max max-w-sm rounded-2xl shadow-xl mb-6 h-20"
                 />
               );
@@ -39,7 +40,7 @@ const CryptoList = ({ cryptos }) => {
           </Masonry>
         </ResponsiveMasonry>
       }
-    </main>
+    </section>
   );
 };
 
