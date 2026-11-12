@@ -1,3 +1,5 @@
+import { StarFilledIcon, StarOutlineIcon } from "./icons";
+
 const StarIcon = ({ onClick, isFavorite, label }) => {
   const favoriteColor = isFavorite ? "text-favorite" : "text-idle";
   return (
@@ -5,10 +7,10 @@ const StarIcon = ({ onClick, isFavorite, label }) => {
       type="button"
       aria-pressed={isFavorite}
       aria-label={label}
-      className={`flex items-center justify-center h-9 w-9 text-2xl leading-none ${favoriteColor}`}
+      className={`flex items-center justify-center h-9 w-9 ${favoriteColor}`}
       onClick={onClick}
     >
-      <span aria-hidden="true">{isFavorite ? "★" : "☆"}</span>
+      {isFavorite ? <StarFilledIcon className="h-6 w-6" /> : <StarOutlineIcon className="h-6 w-6" />}
     </button>
   );
 };

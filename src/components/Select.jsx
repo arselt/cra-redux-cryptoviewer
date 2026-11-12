@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { ChevronIcon } from "./icons";
 
 // Custom listbox (WAI-ARIA select-only combobox pattern): styled with theme tokens, fully keyboard operable.
 // options: [{ value, label, shortLabel? }]
@@ -77,7 +78,7 @@ const Select = ({ value, options, onChange, label, prefix, buttonClassName = "",
       >
         {prefix && <span className="text-sm text-subtle whitespace-nowrap">{prefix}</span>}
         <span className="font-medium">{selected.shortLabel ?? selected.label}</span>
-        <span aria-hidden="true" className={`text-xs transition-transform motion-reduce:transition-none ${isOpen ? "rotate-180" : ""}`}>▾</span>
+        <ChevronIcon className={`h-4 w-4 transition-transform motion-reduce:transition-none ${isOpen ? "rotate-180" : ""}`} />
       </button>
       {isOpen && (
         <ul
