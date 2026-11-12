@@ -25,9 +25,14 @@ export const getCrypto = async () => {
   }
 };
 
-export const getCryptoDetails = async (cryptoItem) => {
+export const CHART_RANGES = [7, 30, 90];
+
+export const getCryptoDetails = async (cryptoItem, days = 30) => {
+  if (!CHART_RANGES.includes(days)) throw new Error(`Unsupported range: ${days}`);
   try {
-    const { data } = await api.get(`/coins/${cryptoItem}/market_chart?vs_currency=usd&days=30&interval=daily&precision=6`)
+    const { data } = await api.get(`/coins/${encodeURIComponent(cryptoItem)}/market_chart`, {
+      params: { vs_currency: "usd", days, interval: "daily", precision: 6 }
+    });
     return data;
   } catch (error) {
     console.error('Error fetching crypto detail data:', error.message);

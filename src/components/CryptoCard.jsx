@@ -12,7 +12,8 @@ const CryptoCard = ({
   cryptoValue,
   cryptoChangeDay,
   cryptoImage,
-  cryptoFavorite
+  cryptoFavorite,
+  crypto
 }) => {
   const dispatch = useDispatch();
   const [isShown, setIsShown] = useState(false);
@@ -48,7 +49,7 @@ const CryptoCard = ({
         </div>
       </div>
       {/* 👇️ show component on click */}
-      {isShown && <CryptoDetailsCard cryptoId={cryptoId} cryptoName={cryptoName} />}
+      {isShown && <CryptoDetailsCard cryptoId={cryptoId} cryptoName={cryptoName} crypto={crypto} />}
     </article>
   );
 };
