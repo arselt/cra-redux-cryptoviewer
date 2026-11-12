@@ -2,4 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Chivo:wght@200;300;400;500;600;700&display=swap");
+@layer base {
+  /* One visible focus style for every interactive element; dark surfaces override the colour */
+  :where(a, button, [tabindex]):focus-visible {
+    outline: 3px solid theme("colors.zinc.900");
+    outline-offset: 2px;
+    border-radius: 0.375rem;
+  }
+}
