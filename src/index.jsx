@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { applyMiddleware, compose, legacy_createStore as createStore, combineReducers } from "redux";
 import { logger } from "./middlewares";
 import App from "./App";
+import { PrefsProvider } from "./prefs";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/es/storage";
 
@@ -31,7 +32,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <PrefsProvider>
+        <App />
+      </PrefsProvider>
     </PersistGate>
   </Provider>
 );

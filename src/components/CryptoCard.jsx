@@ -29,7 +29,7 @@ const CryptoCard = ({
   cryptoChangeDay == null || undefined ? cryptoChangeDay = 0: cryptoChangeDay;
   
   return (
-    <article className="crypto-card break-inside-avoid-column bg-zinc-200 flex flex-wrap w-full rounded-2xl shadow-md hover:shadow-xl transition-shadow motion-reduce:transition-none">
+    <article className="crypto-card break-inside-avoid-column bg-card border border-line flex flex-wrap w-full rounded-2xl shadow-md hover:shadow-xl transition-shadow motion-reduce:transition-none">
       <div className="flex items-center justify-between gap-2 w-full h-20 shadow-lg rounded-2xl px-3">
         <div className="flex items-center min-w-0">
           <img src={cryptoImage} alt="" className="w-7 h-7 shrink-0 rounded-full" loading="lazy"/>

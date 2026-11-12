@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="font-Chivo">
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-10 focus:m-2 focus:rounded-md focus:bg-zinc-900 focus:px-3 focus:py-2 focus:text-zinc-100 focus:outline-zinc-200">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-10 focus:m-2 focus:rounded-md focus:bg-ink focus:px-3 focus:py-2 focus:text-page focus:outline-page">
         Skip to content
       </a>
       <Header />
@@ -65,7 +65,7 @@ function App() {
         )}
         {favorites.length >= 1 && <CryptoList title="Favorites" cryptos={favorites} />}
         {!isFirstLoad && !error && visible.length === 0 ? (
-          <p className="px-8 pt-8 text-zinc-700">No coins match "{query}".</p>
+          <p className="px-8 pt-8 text-subtle">No coins match "{query}".</p>
         ) : (
           <CryptoList title="Cryptocurrencies by marketcap" cryptos={visible} isLoading={isFirstLoad} />
         )}
