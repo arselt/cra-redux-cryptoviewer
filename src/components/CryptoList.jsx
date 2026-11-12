@@ -1,3 +1,4 @@
+import { useId } from "react";
 import CryptoCard from "./CryptoCard";
 
 import { useSelector } from "react-redux";
@@ -8,12 +9,13 @@ import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 const CryptoList = ({ cryptos, title }) => {
   const loading = useSelector((state) => state.cryptos.loading);
 
-  console.log(cryptos);
+  const headingId = useId();
   return (
-    <section className="mt-5 px-6 gap-8 pb-5 lg:max-w-7xl mx-auto">
-      <h2 className="text-2xl px-2 pb-6 capitalize">{title}</h2>
+    <section aria-labelledby={headingId} aria-busy={loading} className="mt-5 px-6 gap-8 pb-5 lg:max-w-7xl mx-auto">
+      <h2 id={headingId} className="text-2xl px-2 pb-6 capitalize">{title}</h2>
       { loading ? 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div role="status" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <span className="sr-only">Loading cryptocurrencies</span>
           {Array(30)
           .fill(true)
           .map((_, i) => (

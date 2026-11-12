@@ -51,13 +51,13 @@ const CryptoCard = ({
             </span>
           </div>
           <div className="flex flex-col">
-            <IconStar onClick={handleFavoriteClick} isFavorite={cryptoFavorite}/>
-            <IconArrow onClick={handleDetailClick} isShown={isShown} />
+            <IconStar onClick={handleFavoriteClick} isFavorite={cryptoFavorite} label={cryptoFavorite ? `Remove ${cryptoName} from` : `Add ${cryptoName} to`} />
+            <IconArrow onClick={handleDetailClick} isShown={isShown} label={isShown ? `Hide ${cryptoName}` : `Show ${cryptoName}`} controls={`details-${cryptoId}`} />
           </div>
         </div>
       </div>
       {/* 👇️ show component on click */}
-      {isShown && <CryptoDetailsCard cryptoId={cryptoId} />}
+      {isShown && <CryptoDetailsCard cryptoId={cryptoId} cryptoName={cryptoName} />}
     </article>
   );
 };

@@ -8,7 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const CryptoPriceChart = lazy(() => import("./CryptoPriceChart"));
 
-const CryptoDetailsCard = ({ cryptoId }) => {
+const CryptoDetailsCard = ({ cryptoId, cryptoName }) => {
   const cryptoDetails = useSelector((state) => state.cryptos.cryptoDetails[cryptoId]);
   const dispatch = useDispatch();
 
@@ -28,13 +28,14 @@ const CryptoDetailsCard = ({ cryptoId }) => {
 
   return (
     <SkeletonTheme baseColor="#f4f4f5" highlightColor="#fafafa">
-      <div className="flex w-full h-[210px] p-4">
+      <div id={`details-${cryptoId}`} role="region" aria-label={`${cryptoName} price chart`} className="flex w-full h-[210px] p-4">
         <div className="w-full h-full">
           {cryptoDetails ? (
             <Suspense fallback={<SkeletonLoader />}>
               <CryptoPriceChart 
                 prices={cryptoDetails.prices} 
                 graphColor={"#52525b"}
+                name={cryptoName}
               />
             </Suspense>
           ) : (

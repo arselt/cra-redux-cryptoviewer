@@ -1,8 +1,14 @@
-const IconArrow = ({ onClick, isShown }) => {
-  const shownColor = isShown ? "text-idle rotate-180" : "text-idle";
+const IconArrow = ({ onClick, isShown, label, controls }) => {
   return (
-    <button className={`flex items-center justify-center h-9 w-9 duration-100 ${shownColor}`} onClick={onClick}>
-      ▼
+    <button
+      type="button"
+      aria-expanded={isShown}
+      aria-controls={controls}
+      aria-label={`${label} price chart`}
+      className={`flex items-center justify-center h-9 w-9 text-idle duration-100 motion-reduce:transition-none ${isShown ? "rotate-180" : ""}`}
+      onClick={onClick}
+    >
+      <span aria-hidden="true">▼</span>
     </button>
   );
 };

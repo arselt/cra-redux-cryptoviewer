@@ -24,7 +24,7 @@ ChartJS.register(
   TimeScale
 );
 
-const CryptoPriceChart = ({ prices, graphColor }) => {
+const CryptoPriceChart = ({ prices, graphColor, name }) => {
   const chartData = {
     datasets: [{
       label: 'Price (USD)',
@@ -38,6 +38,7 @@ const CryptoPriceChart = ({ prices, graphColor }) => {
   };
 
   const options = {
+    animation: !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     responsive: true,
 		maintainAspectRatio: false,
 		plugins: {
@@ -58,7 +59,11 @@ const CryptoPriceChart = ({ prices, graphColor }) => {
     }
   };
 
-  return <Line data={chartData} options={options} style={{ height: '100%', width: '100%' }} />;
+  const first = prices[0]?.[1];
+  const last = prices[prices.length - 1]?.[1];
+  const summary = `${name} price history in USD, from ${first} to ${last}`;
+
+  return <Line role="img" aria-label={summary} data={chartData} options={options} style={{ height: '100%', width: '100%' }} />;
 };
 
 export default CryptoPriceChart;
