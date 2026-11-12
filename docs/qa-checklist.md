@@ -4,7 +4,7 @@ Run `pnpm dev` and check each item after any UI change. Update this file when a 
 
 ## Viewports (no horizontal scroll)
 - [ ] 375 and 390 px (iPhone, with status bar / notch: header not clipped)
-- [ ] 360 px (Android)
+- [ ] 360 px (Android): wordmark hides, logo stays; header controls never overlap
 - [ ] 820 px (tablet)
 - [ ] 1440 px (desktop)
 
@@ -44,3 +44,6 @@ Run `pnpm dev` and check each item after any UI change. Update this file when a 
 
 ## Real devices (not testable locally)
 - [ ] iPhone: safe-area insets with `viewport-fit=cover`
+
+## Branding
+- [ ] Tab shows the logo (SVG favicon, ICO fallback); iOS home-screen icon and manifest icons render

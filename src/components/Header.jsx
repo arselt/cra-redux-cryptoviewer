@@ -10,9 +10,10 @@ const Header = () => {
   const themeLabel = t("theme.label", { mode: t(`theme.${theme}`) });
   return (
     <header className="bg-brand min-h-14 pt-[env(safe-area-inset-top)] rounded-b-xl w-full max-w-7xl mx-auto">
-      <nav aria-label={t("nav.label")} className="flex justify-between items-center gap-2 py-2 pl-[max(1.5rem,env(safe-area-inset-left))] pr-[max(1.5rem,env(safe-area-inset-right))] text-on-brand">
-        <a href="/" className="focus-visible:outline-on-brand">
-          <h1 className="text-xl min-[400px]:text-2xl sm:text-3xl">Cryptoviewer</h1>
+      <nav aria-label={t("nav.label")} className="flex justify-between items-center gap-2 py-2 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] text-on-brand">
+        <a href="/" className="flex items-center gap-2 focus-visible:outline-on-brand">
+          <img src="/favicon.svg" alt="" width="32" height="32" className="h-8 w-8 rounded-lg ring-1 ring-white/10" />
+          <h1 className="whitespace-nowrap max-[379px]:sr-only text-lg min-[400px]:text-2xl sm:text-3xl">Cryptoviewer</h1>
         </a>
         <div className="flex items-center gap-2">
           <Select
