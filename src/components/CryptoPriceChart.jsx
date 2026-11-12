@@ -86,6 +86,8 @@ const CryptoPriceChart = ({ prices, name }) => {
     }
   };
 
+  if (prices.length === 0) return null;
+
   return (
     <Line
       key={theme}

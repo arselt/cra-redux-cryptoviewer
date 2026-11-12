@@ -20,8 +20,8 @@ const rootReducer = combineReducers({ cryptos: cryptosReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composedEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(persistedReducer, composedEnhancers(applyMiddleware(logger)));
+const composedEnhancers = (import.meta.env.DEV && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+const store = createStore(persistedReducer, composedEnhancers(applyMiddleware(...(import.meta.env.DEV ? [logger] : []))));
 
 const persistor = persistStore(store);
 

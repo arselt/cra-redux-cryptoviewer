@@ -9,6 +9,8 @@ import { usePrefs } from "../prefs";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+const DETAILS_TTL_MS = 10 * 60_000; // persisted charts older than this are refetched
+
 const CryptoPriceChart = lazy(() => import("./CryptoPriceChart"));
 
 const SkeletonLoader = () => <Skeleton borderRadius="16px" className="rounded-2xl w-full h-full" />;
@@ -20,7 +22,7 @@ const Stat = ({ label, value }) => (
   </div>
 );
 
-const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto }) => {
+const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto, detailsId }) => {
   const { t, locale, money, compactMoney, currency } = usePrefs();
   const [days, setDays] = useState(30);
   const [hasError, setHasError] = useState(false);
@@ -31,19 +33,20 @@ const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto }) => {
   const fetchDetails = useCallback(async () => {
     setHasError(false);
     try {
-      dispatch(setCryptoDetails(cacheKey, await getCryptoDetails(cryptoId, days, currency)));
+      dispatch(setCryptoDetails(cacheKey, { ...(await getCryptoDetails(cryptoId, days, currency)), fetchedAt: Date.now() }));
     } catch {
       setHasError(true);
     }
   }, [cacheKey, cryptoId, days, currency, dispatch]);
 
   useEffect(() => {
-    if (!cryptoDetails) fetchDetails();
+    const isFresh = Date.now() - (cryptoDetails?.fetchedAt ?? 0) < DETAILS_TTL_MS;
+    if (!isFresh) fetchDetails();
   }, [cryptoDetails, fetchDetails]);
 
   return (
     <SkeletonTheme baseColor="rgb(var(--page))" highlightColor="rgb(var(--line))">
-      <div id={`details-${cryptoId}`} role="region" aria-label={t("details.region", { name: cryptoName })} className="w-full p-4 border-t border-line">
+      <div id={detailsId} role="region" aria-label={t("details.region", { name: cryptoName })} className="w-full p-4 border-t border-line">
         {crypto && (
           <dl className="grid grid-cols-2 gap-x-4 gap-y-3 pb-4 sm:grid-cols-3">
             <Stat label={t("details.rank")} value={`#${crypto.market_cap_rank ?? "–"}`} />

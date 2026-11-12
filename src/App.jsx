@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCryptos, setError, setLoading } from "./actions";
 
@@ -25,16 +25,20 @@ function App() {
   const sortKey = storedSortKey in SORT_OPTIONS ? storedSortKey : "rank";
   const [onlyFavorites, setOnlyFavorites] = usePersistedState("onlyFavorites", false);
   const [pageCount, setPageCount] = useState(1);
+  const latestRequest = useRef(0);
 
   const fetchCryptos = useCallback(async () => {
+    const requestId = ++latestRequest.current;
+    const isStale = () => requestId !== latestRequest.current; // a newer language/currency request won
     dispatch(setLoading(true));
     dispatch(setError(null));
     try {
-      dispatch(setCryptos(await getCrypto(lang, currency)));
+      const data = await getCrypto(lang, currency);
+      if (!isStale()) dispatch(setCryptos(data));
     } catch {
-      dispatch(setError(true));
+      if (!isStale()) dispatch(setError(true));
     } finally {
-      dispatch(setLoading(false));
+      if (!isStale()) dispatch(setLoading(false));
     }
   }, [dispatch, lang, currency]);
 
@@ -82,9 +86,9 @@ function App() {
             <ErrorMessage message={t("error.prices")} onRetry={fetchCryptos} className="mx-2" />
           </div>
         )}
-        {!onlyFavorites && favorites.length >= 1 && <CryptoList title={t("list.favorites")} cryptos={favorites} />}
+        {!onlyFavorites && favorites.length >= 1 && <CryptoList title={t("list.favorites")} cryptos={favorites} isGrid />}
         {!isFirstLoad && !hasError && mainList.length === 0 ? (
-          <p className="px-8 pt-8 text-subtle">{hasNoFavorites ? t("list.noFavorites") : t("list.noResults", { query })}</p>
+          <p role="status" className="px-8 pt-8 text-subtle">{hasNoFavorites ? t("list.noFavorites") : t("list.noResults", { query })}</p>
         ) : (
           <CryptoList title={onlyFavorites ? t("list.favorites") : t("list.all")} cryptos={pageItems} isLoading={isFirstLoad}>
             {remaining > 0 && (

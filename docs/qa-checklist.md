@@ -32,6 +32,12 @@ Run `pnpm dev` and check each item after any UI change. Update this file when a 
 - [ ] Sort, "favorites only", language and theme survive a reload
 - [ ] "Show more" reveals 24 more coins and resets when filters change
 
+## Robustness
+- [ ] Expanded charts older than 10 min refetch after a reload (no stale persisted chart)
+- [ ] Switching currency/language quickly ends with prices in the last choice
+- [ ] Favorites and main list can both show the same coin without duplicate DOM ids
+- [ ] Production bundle has no redux logger output in the console
+
 ## Contrast and motion
 - [ ] Text >= 4.5:1, icons >= 3:1 (tokens in `tailwind.config.js`)
 - [ ] With "reduce motion" on: no skeleton shimmer, chart draw or arrow rotation animation
