@@ -4,7 +4,7 @@ import IconArrow from "./IconArrow";
 import IconStar from "./IconStar";
 import { useDispatch } from "react-redux";
 import { setFavorite } from "../actions";
-import { formatUsd, formatPercent } from "../utils/format";
+import { formatPercent } from "../utils/format";
 import { usePrefs } from "../prefs";
 
 const CryptoCard = ({
@@ -16,7 +16,7 @@ const CryptoCard = ({
   cryptoFavorite,
   crypto
 }) => {
-  const { t, locale } = usePrefs();
+  const { t, locale, money } = usePrefs();
   const dispatch = useDispatch();
   const [isShown, setIsShown] = useState(false);
 
@@ -39,7 +39,7 @@ const CryptoCard = ({
         </div>
         <div className="flex items-center text-end shrink-0">
           <div className="flex flex-col mr-1">
-            <span className="text-base font-medium tabular-nums">{formatUsd(cryptoValue, locale)}</span>
+            <span className="text-base font-medium tabular-nums">{money(cryptoValue)}</span>
             <span className={`text-sm tabular-nums ${cryptoChangeDay >= 0 ? "text-positive" : "text-negative"}`}>
               {formatPercent(cryptoChangeDay, locale)}
             </span>

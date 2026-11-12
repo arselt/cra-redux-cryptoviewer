@@ -1,4 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { CURRENCIES } from "./api";
+import { formatCompactMoney, formatMoney } from "./utils/format";
 import { DICTIONARIES, LOCALES, translate } from "./i18n";
 import { usePersistedState } from "./hooks/usePersistedState";
 
@@ -12,6 +14,8 @@ export const PrefsProvider = ({ children }) => {
   const themeMode = THEME_MODES.includes(storedMode) ? storedMode : "system";
   const [storedLang, setLang] = usePersistedState("lang", navigator.language?.startsWith("es") ? "es" : "en");
   const lang = storedLang in DICTIONARIES ? storedLang : "en";
+  const [storedCurrency, setCurrency] = usePersistedState("currency", "usd");
+  const currency = CURRENCIES.includes(storedCurrency) ? storedCurrency : "usd";
   const t = useCallback((key, vars) => translate(lang, key, vars), [lang]);
   const [isSystemDark, setIsSystemDark] = useState(() => window.matchMedia("(prefers-color-scheme: dark)").matches);
 
@@ -35,14 +39,18 @@ export const PrefsProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       theme,
-      themeMode,
       lang,
       setLang,
       t,
       locale: LOCALES[lang],
-      cycleTheme: () => setThemeMode(THEME_MODES[(THEME_MODES.indexOf(themeMode) + 1) % THEME_MODES.length])
+      currency,
+      setCurrency,
+      money: (amount) => formatMoney(amount, LOCALES[lang], currency.toUpperCase()),
+      compactMoney: (amount) => formatCompactMoney(amount, LOCALES[lang], currency.toUpperCase()),
+      // Pure toggle on the resolved theme; "system" is only the initial default
+      toggleTheme: () => setThemeMode(theme === "dark" ? "light" : "dark")
     }),
-    [theme, themeMode, setThemeMode, lang, setLang, t]
+    [theme, setThemeMode, lang, setLang, t, currency, setCurrency]
   );
 
   return <PrefsContext.Provider value={value}>{children}</PrefsContext.Provider>;

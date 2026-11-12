@@ -15,7 +15,7 @@ import Toolbar from "./components/Toolbar";
 const PAGE_SIZE = 24;
 
 function App() {
-  const { t, lang } = usePrefs();
+  const { t, lang, currency } = usePrefs();
   const cryptos = useSelector((state) => state.cryptos.cryptos);
   const isLoading = useSelector((state) => state.cryptos.loading);
   const hasError = useSelector((state) => Boolean(state.cryptos.error));
@@ -30,13 +30,13 @@ function App() {
     dispatch(setLoading(true));
     dispatch(setError(null));
     try {
-      dispatch(setCryptos(await getCrypto(lang)));
+      dispatch(setCryptos(await getCrypto(lang, currency)));
     } catch {
       dispatch(setError(true));
     } finally {
       dispatch(setLoading(false));
     }
-  }, [dispatch, lang]);
+  }, [dispatch, lang, currency]);
 
   useEffect(() => {
     fetchCryptos();

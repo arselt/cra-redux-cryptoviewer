@@ -2,10 +2,10 @@ export default {
   "app.skipToContent": "Saltar al contenido",
   "nav.label": "Principal",
   "theme.label": "Tema: {mode}",
-  "theme.system": "sistema",
   "theme.light": "claro",
   "theme.dark": "oscuro",
   "language.label": "Idioma",
+  "currency.label": "Moneda",
   "toolbar.search": "Buscar",
   "toolbar.searchPlaceholder": "Nombre o símbolo",
   "toolbar.sortBy": "Ordenar por",
@@ -40,5 +40,5 @@ export default {
   "details.ath": "Máximo histórico",
   "details.range": "Rango del gráfico",
   "details.days": "{days}D",
-  "chart.summary": "Historial de precio de {name} en USD, de {from} a {to}"
+  "chart.summary": "Historial de precio de {name} en {currency}, de {from} a {to}"
 };

@@ -2,7 +2,7 @@ import { CHART_RANGES, getCryptoDetails } from "../api";
 import { useCallback, useEffect, useState, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCryptoDetails } from "../actions";
-import { formatCompactUsd, formatPercent, formatUsd } from "../utils/format";
+import { formatPercent } from "../utils/format";
 import ErrorMessage from "./ErrorMessage";
 import { usePrefs } from "../prefs";
 
@@ -21,21 +21,21 @@ const Stat = ({ label, value }) => (
 );
 
 const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto }) => {
-  const { t, locale } = usePrefs();
+  const { t, locale, money, compactMoney, currency } = usePrefs();
   const [days, setDays] = useState(30);
   const [hasError, setHasError] = useState(false);
-  const cacheKey = `${cryptoId}:${days}`;
+  const cacheKey = `${cryptoId}:${days}:${currency}`;
   const cryptoDetails = useSelector((state) => state.cryptos.cryptoDetails[cacheKey]);
   const dispatch = useDispatch();
 
   const fetchDetails = useCallback(async () => {
     setHasError(false);
     try {
-      dispatch(setCryptoDetails(cacheKey, await getCryptoDetails(cryptoId, days)));
+      dispatch(setCryptoDetails(cacheKey, await getCryptoDetails(cryptoId, days, currency)));
     } catch {
       setHasError(true);
     }
-  }, [cacheKey, cryptoId, days, dispatch]);
+  }, [cacheKey, cryptoId, days, currency, dispatch]);
 
   useEffect(() => {
     if (!cryptoDetails) fetchDetails();
@@ -47,11 +47,11 @@ const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto }) => {
         {crypto && (
           <dl className="grid grid-cols-2 gap-x-4 gap-y-3 pb-4 sm:grid-cols-3">
             <Stat label={t("details.rank")} value={`#${crypto.market_cap_rank ?? "–"}`} />
-            <Stat label={t("details.marketCap")} value={formatCompactUsd(crypto.market_cap, locale)} />
-            <Stat label={t("details.volume")} value={formatCompactUsd(crypto.total_volume, locale)} />
-            <Stat label={t("details.high")} value={formatUsd(crypto.high_24h, locale)} />
-            <Stat label={t("details.low")} value={formatUsd(crypto.low_24h, locale)} />
-            <Stat label={t("details.ath")} value={`${formatUsd(crypto.ath, locale)} (${formatPercent(crypto.ath_change_percentage, locale)})`} />
+            <Stat label={t("details.marketCap")} value={compactMoney(crypto.market_cap)} />
+            <Stat label={t("details.volume")} value={compactMoney(crypto.total_volume)} />
+            <Stat label={t("details.high")} value={money(crypto.high_24h)} />
+            <Stat label={t("details.low")} value={money(crypto.low_24h)} />
+            <Stat label={t("details.ath")} value={`${money(crypto.ath)} (${formatPercent(crypto.ath_change_percentage, locale)})`} />
           </dl>
         )}
         <div role="group" aria-label={t("details.range")} className="flex gap-2 pb-3">

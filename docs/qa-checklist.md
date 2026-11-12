@@ -26,7 +26,9 @@ Run `pnpm dev` and check each item after any UI change. Update this file when a 
 
 ## Preferences
 - [ ] Language (EN/ES) translates every visible and aria string; `pnpm test` guards missing keys
-- [ ] Theme cycles system/light/dark, no flash on reload; chart colours follow the theme
+- [ ] Theme button flips light/dark on every single click (default follows the system); no flash on reload; chart colours follow the theme
+- [ ] Currency selector (USD, EUR, MXN, …) refetches prices and reformats cards, stats and chart
+- [ ] Custom selects: mouse, arrows/Home/End/Enter/Esc, outside click closes, focus returns to the button, popups not clipped at 375 px
 - [ ] Sort, "favorites only", language and theme survive a reload
 - [ ] "Show more" reveals 24 more coins and resets when filters change
 

@@ -3,10 +3,10 @@ export default {
   "app.skipToContent": "Skip to content",
   "nav.label": "Main",
   "theme.label": "Theme: {mode}",
-  "theme.system": "system",
   "theme.light": "light",
   "theme.dark": "dark",
   "language.label": "Language",
+  "currency.label": "Currency",
   "toolbar.search": "Search",
   "toolbar.searchPlaceholder": "Name or symbol",
   "toolbar.sortBy": "Sort by",
@@ -41,5 +41,5 @@ export default {
   "details.ath": "All-time high",
   "details.range": "Chart range",
   "details.days": "{days}D",
-  "chart.summary": "{name} price history in USD, from {from} to {to}"
+  "chart.summary": "{name} price history in {currency}, from {from} to {to}"
 };

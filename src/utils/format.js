@@ -1,13 +1,13 @@
-// Single place for number formatting; sub-dollar coins need more decimals
-export const formatUsd = (value, locale = "en-US") =>
+// Single place for number formatting; sub-unit prices need more decimals
+export const formatMoney = (value, locale, currency) =>
   new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: "USD",
+    currency,
     maximumFractionDigits: value < 1 ? 6 : 2
   }).format(value);
 
-export const formatPercent = (value, locale = "en-US") =>
-  new Intl.NumberFormat(locale, { style: "percent", signDisplay: "exceptZero", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value / 100);
+export const formatCompactMoney = (value, locale, currency) =>
+  new Intl.NumberFormat(locale, { style: "currency", currency, notation: "compact", maximumFractionDigits: 2 }).format(value);
 
-export const formatCompactUsd = (value, locale = "en-US") =>
-  new Intl.NumberFormat(locale, { style: "currency", currency: "USD", notation: "compact", maximumFractionDigits: 2 }).format(value);
+export const formatPercent = (value, locale) =>
+  new Intl.NumberFormat(locale, { style: "percent", signDisplay: "exceptZero", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value / 100);
