@@ -14,7 +14,7 @@
 
 - ### Download the repository
 
-- ### Install dependencies with `npm install`
-- ### run `npm start`
+- ### Install dependencies with `pnpm install`
+- ### run `pnpm dev`
 
 - ### Open [http://localhost:3000](http://localhost:3000) to view the local development mode in your browser.
