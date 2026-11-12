@@ -7,7 +7,7 @@ import { applyMiddleware, compose, legacy_createStore as createStore, combineRed
 import { logger } from "./middlewares";
 import App from "./App";
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/es/storage";
 
 const persistConfig = {
   key: "root",
