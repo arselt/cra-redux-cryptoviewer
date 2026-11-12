@@ -16,3 +16,24 @@
     animation: none !important;
   }
 }
+
+@layer components {
+  /* Cards adapt to the width of their column, not the viewport */
+  .crypto-card {
+    container-type: inline-size;
+  }
+  .crypto-card-name {
+    font-size: 1.125rem;
+  }
+  @container (min-width: 22rem) {
+    .crypto-card-name {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-zinc-100 min-h-dvh;
+  }
+}

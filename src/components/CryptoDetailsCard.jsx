@@ -23,12 +23,12 @@ const CryptoDetailsCard = ({ cryptoId, cryptoName }) => {
   }, [cryptoId, cryptoDetails, dispatch]);
 
   const SkeletonLoader = () => (
-    <Skeleton borderRadius="16px" className="rounded-2xl shadow-xl mb-6 w-full h-full" />
+    <Skeleton borderRadius="16px" className="rounded-2xl w-full h-full" />
   );
 
   return (
     <SkeletonTheme baseColor="#f4f4f5" highlightColor="#fafafa">
-      <div id={`details-${cryptoId}`} role="region" aria-label={`${cryptoName} price chart`} className="flex w-full h-[210px] p-4">
+      <div id={`details-${cryptoId}`} role="region" aria-label={`${cryptoName} price chart`} className="flex w-full h-[210px] p-4 border-t border-zinc-300">
         <div className="w-full h-full">
           {cryptoDetails ? (
             <Suspense fallback={<SkeletonLoader />}>

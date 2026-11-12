@@ -12,19 +12,19 @@ const CryptoList = ({ cryptos, title }) => {
   const headingId = useId();
   return (
     <section aria-labelledby={headingId} aria-busy={loading} className="mt-5 px-6 gap-8 pb-5 lg:max-w-7xl mx-auto">
-      <h2 id={headingId} className="text-2xl px-2 pb-6 capitalize">{title}</h2>
+      <h2 id={headingId} className="text-2xl font-medium px-2 pb-5 capitalize">{title}</h2>
       { loading ? 
         <div role="status" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <span className="sr-only">Loading cryptocurrencies</span>
           {Array(30)
           .fill(true)
           .map((_, i) => (
-            <Skeleton key={i} borderRadius="16px" className={"w-max rounded-2xl shadow-xl mb-6 h-20"} />
+            <Skeleton key={i} borderRadius="16px" className={"w-full rounded-2xl h-20"} />
           ))}
         </div>
       : 
         <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}} >
-          <Masonry>
+          <Masonry gutter="1rem">
             {cryptos.map((cryptos) => {
               return (
                 <CryptoCard
@@ -32,11 +32,9 @@ const CryptoList = ({ cryptos, title }) => {
                   cryptoId={cryptos.id}
                   cryptoName={cryptos.name}
                   cryptoValue={cryptos.current_price}
-                  cryptoTicker="USD"
                   cryptoChangeDay={cryptos.price_change_percentage_24h}
                   cryptoImage={cryptos.image}
                   cryptoFavorite={cryptos.favorite}
-                  className="w-max max-w-sm rounded-2xl shadow-xl mb-6 h-20"
                 />
               );
             })}
