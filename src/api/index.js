@@ -7,13 +7,14 @@ const api = axios.create({
   }
 })
 
-export const getCrypto = async () => {
+export const getCrypto = async (locale = "en") => {
   try {
     const { data } = await api.get("/coins/markets", {
       params: {
         vs_currency: 'usd',
         order: 'market_cap_desc',
-        per_page: 99,
+        per_page: 250,
+        locale,
         page: 1,
         sparkline: false
       }

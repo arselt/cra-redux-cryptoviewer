@@ -1,10 +1,12 @@
 import { useId } from "react";
 import CryptoCard from "./CryptoCard";
+import { usePrefs } from "../prefs";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
-const CryptoList = ({ cryptos, title, isLoading = false }) => {
+const CryptoList = ({ cryptos, title, isLoading = false, children }) => {
+  const { t } = usePrefs();
   const loading = isLoading;
 
   const headingId = useId();
@@ -14,7 +16,7 @@ const CryptoList = ({ cryptos, title, isLoading = false }) => {
       { loading ? 
         <SkeletonTheme baseColor="rgb(var(--card))" highlightColor="rgb(var(--line))">
         <div role="status" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <span className="sr-only">Loading cryptocurrencies</span>
+          <span className="sr-only">{t("list.loading")}</span>
           {Array(30)
           .fill(true)
           .map((_, i) => (
@@ -42,6 +44,7 @@ const CryptoList = ({ cryptos, title, isLoading = false }) => {
           </Masonry>
         </ResponsiveMasonry>
       }
+      {children}
     </section>
   );
 };

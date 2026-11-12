@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
+import { enUS, es } from "date-fns/locale";
 import { usePrefs } from "../prefs";
 import { formatCompactUsd, formatUsd } from "../utils/format";
 
@@ -19,7 +20,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, 
 const token = (name, alpha = 1) => `rgb(${getComputedStyle(document.documentElement).getPropertyValue(`--${name}`).trim()} / ${alpha})`;
 
 const CryptoPriceChart = ({ prices, name }) => {
-  const { theme } = usePrefs(); // re-render on theme change so token() re-reads the variables
+  const { theme, t, locale } = usePrefs(); // re-render on theme change so token() re-reads the variables
   const first = prices[0]?.[1];
   const last = prices[prices.length - 1]?.[1];
   const trendName = last >= first ? "positive" : "negative";
@@ -65,9 +66,10 @@ const CryptoPriceChart = ({ prices, name }) => {
         bodyColor: token("page"),
         padding: 10,
         cornerRadius: 10,
-        callbacks: { label: (item) => formatUsd(item.parsed.y) }
+        callbacks: { label: (item) => formatUsd(item.parsed.y, locale) }
       }
     },
+    adapters: { date: { locale: locale.startsWith("es") ? es : enUS } },
     scales: {
       x: {
         type: "time",
@@ -80,7 +82,7 @@ const CryptoPriceChart = ({ prices, name }) => {
         beginAtZero: false,
         grid: { color: token("line", 0.6) },
         border: { display: false },
-        ticks: { color: token("subtle"), maxTicksLimit: 5, callback: (value) => formatCompactUsd(value) }
+        ticks: { color: token("subtle"), maxTicksLimit: 5, callback: (value) => formatCompactUsd(value, locale) }
       }
     }
   };
@@ -89,7 +91,7 @@ const CryptoPriceChart = ({ prices, name }) => {
     <Line
       key={theme}
       role="img"
-      aria-label={`${name} price history in USD, from ${first} to ${last}`}
+      aria-label={t("chart.summary", { name, from: formatUsd(first, locale), to: formatUsd(last, locale) })}
       data={chartData}
       options={options}
       style={{ height: "100%", width: "100%" }}

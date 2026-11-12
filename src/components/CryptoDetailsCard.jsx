@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCryptoDetails } from "../actions";
 import { formatCompactUsd, formatPercent, formatUsd } from "../utils/format";
 import ErrorMessage from "./ErrorMessage";
+import { usePrefs } from "../prefs";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -20,6 +21,7 @@ const Stat = ({ label, value }) => (
 );
 
 const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto }) => {
+  const { t, locale } = usePrefs();
   const [days, setDays] = useState(30);
   const [hasError, setHasError] = useState(false);
   const cacheKey = `${cryptoId}:${days}`;
@@ -41,18 +43,18 @@ const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto }) => {
 
   return (
     <SkeletonTheme baseColor="rgb(var(--page))" highlightColor="rgb(var(--line))">
-      <div id={`details-${cryptoId}`} role="region" aria-label={`${cryptoName} details`} className="w-full p-4 border-t border-line">
+      <div id={`details-${cryptoId}`} role="region" aria-label={t("details.region", { name: cryptoName })} className="w-full p-4 border-t border-line">
         {crypto && (
           <dl className="grid grid-cols-2 gap-x-4 gap-y-3 pb-4 sm:grid-cols-3">
-            <Stat label="Rank" value={`#${crypto.market_cap_rank ?? "–"}`} />
-            <Stat label="Market cap" value={formatCompactUsd(crypto.market_cap)} />
-            <Stat label="24h volume" value={formatCompactUsd(crypto.total_volume)} />
-            <Stat label="24h high" value={formatUsd(crypto.high_24h)} />
-            <Stat label="24h low" value={formatUsd(crypto.low_24h)} />
-            <Stat label="All-time high" value={`${formatUsd(crypto.ath)} (${formatPercent(crypto.ath_change_percentage)})`} />
+            <Stat label={t("details.rank")} value={`#${crypto.market_cap_rank ?? "–"}`} />
+            <Stat label={t("details.marketCap")} value={formatCompactUsd(crypto.market_cap, locale)} />
+            <Stat label={t("details.volume")} value={formatCompactUsd(crypto.total_volume, locale)} />
+            <Stat label={t("details.high")} value={formatUsd(crypto.high_24h, locale)} />
+            <Stat label={t("details.low")} value={formatUsd(crypto.low_24h, locale)} />
+            <Stat label={t("details.ath")} value={`${formatUsd(crypto.ath, locale)} (${formatPercent(crypto.ath_change_percentage, locale)})`} />
           </dl>
         )}
-        <div role="group" aria-label="Chart range" className="flex gap-2 pb-3">
+        <div role="group" aria-label={t("details.range")} className="flex gap-2 pb-3">
           {CHART_RANGES.map((range) => (
             <button
               key={range}
@@ -61,13 +63,13 @@ const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto }) => {
               onClick={() => setDays(range)}
               className={`rounded-lg px-3 min-h-9 ${range === days ? "bg-ink text-page" : "bg-line text-ink"}`}
             >
-              {range}D
+              {t("details.days", { days: range })}
             </button>
           ))}
         </div>
         <div className="h-[210px]">
           {hasError ? (
-            <ErrorMessage message="Could not load the chart." onRetry={fetchDetails} />
+            <ErrorMessage message={t("error.chart")} onRetry={fetchDetails} />
           ) : cryptoDetails ? (
             <Suspense fallback={<SkeletonLoader />}>
               <CryptoPriceChart prices={cryptoDetails.prices} name={cryptoName} />

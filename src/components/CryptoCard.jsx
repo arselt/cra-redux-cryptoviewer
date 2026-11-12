@@ -5,6 +5,7 @@ import IconStar from "./IconStar";
 import { useDispatch } from "react-redux";
 import { setFavorite } from "../actions";
 import { formatUsd, formatPercent } from "../utils/format";
+import { usePrefs } from "../prefs";
 
 const CryptoCard = ({
   cryptoId,
@@ -15,6 +16,7 @@ const CryptoCard = ({
   cryptoFavorite,
   crypto
 }) => {
+  const { t, locale } = usePrefs();
   const dispatch = useDispatch();
   const [isShown, setIsShown] = useState(false);
 
@@ -37,14 +39,14 @@ const CryptoCard = ({
         </div>
         <div className="flex items-center text-end shrink-0">
           <div className="flex flex-col mr-1">
-            <span className="text-base font-medium tabular-nums">{formatUsd(cryptoValue)}</span>
+            <span className="text-base font-medium tabular-nums">{formatUsd(cryptoValue, locale)}</span>
             <span className={`text-sm tabular-nums ${cryptoChangeDay >= 0 ? "text-positive" : "text-negative"}`}>
-              {formatPercent(cryptoChangeDay)}
+              {formatPercent(cryptoChangeDay, locale)}
             </span>
           </div>
           <div className="flex flex-col">
-            <IconStar onClick={handleFavoriteClick} isFavorite={cryptoFavorite} label={cryptoFavorite ? `Remove ${cryptoName} from` : `Add ${cryptoName} to`} />
-            <IconArrow onClick={handleDetailClick} isShown={isShown} label={isShown ? `Hide ${cryptoName}` : `Show ${cryptoName}`} controls={`details-${cryptoId}`} />
+            <IconStar onClick={handleFavoriteClick} isFavorite={cryptoFavorite} label={cryptoFavorite ? t("card.removeFavorite", { name: cryptoName }) : t("card.addFavorite", { name: cryptoName })} />
+            <IconArrow onClick={handleDetailClick} isShown={isShown} label={isShown ? t("card.hideDetails", { name: cryptoName }) : t("card.showDetails", { name: cryptoName })} controls={`details-${cryptoId}`} />
           </div>
         </div>
       </div>

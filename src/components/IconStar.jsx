@@ -4,7 +4,7 @@ const StarIcon = ({ onClick, isFavorite, label }) => {
     <button
       type="button"
       aria-pressed={isFavorite}
-      aria-label={`${label} favorite`}
+      aria-label={label}
       className={`flex items-center justify-center h-9 w-9 text-2xl leading-none ${favoriteColor}`}
       onClick={onClick}
     >

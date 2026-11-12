@@ -24,6 +24,12 @@ Run `pnpm dev` and check each item after any UI change. Update this file when a 
 - [ ] Star announces "pressed"; arrow announces "expanded" and its name includes the coin
 - [ ] Chart region has a text alternative
 
+## Preferences
+- [ ] Language (EN/ES) translates every visible and aria string; `pnpm test` guards missing keys
+- [ ] Theme cycles system/light/dark, no flash on reload; chart colours follow the theme
+- [ ] Sort, "favorites only", language and theme survive a reload
+- [ ] "Show more" reveals 24 more coins and resets when filters change
+
 ## Contrast and motion
 - [ ] Text >= 4.5:1, icons >= 3:1 (tokens in `tailwind.config.js`)
 - [ ] With "reduce motion" on: no skeleton shimmer, chart draw or arrow rotation animation
