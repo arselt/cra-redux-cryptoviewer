@@ -43,7 +43,7 @@ const CryptoCard = ({
             </span>
             <span
               className={`text-sm uppercase 
-              ${cryptoChangeDay >= 0 ? "text-emerald-600" : "text-rose-500"}
+              ${cryptoChangeDay >= 0 ? "text-positive" : "text-negative"}
               `}
             >
               {cryptoChangeDay >= 0 ? `+${cryptoChangeDay.toFixed(2)}` : cryptoChangeDay.toFixed(2)}
