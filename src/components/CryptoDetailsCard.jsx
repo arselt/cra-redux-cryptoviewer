@@ -70,7 +70,7 @@ const CryptoDetailsCard = ({ cryptoId, cryptoName, crypto }) => {
             <ErrorMessage message="Could not load the chart." onRetry={fetchDetails} />
           ) : cryptoDetails ? (
             <Suspense fallback={<SkeletonLoader />}>
-              <CryptoPriceChart prices={cryptoDetails.prices} graphColor={"#52525b"} name={cryptoName} />
+              <CryptoPriceChart prices={cryptoDetails.prices} name={cryptoName} />
             </Suspense>
           ) : (
             <SkeletonLoader />

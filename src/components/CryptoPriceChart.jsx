@@ -1,69 +1,100 @@
-import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
-  Title,
+  Filler,
   Tooltip,
-  Legend,
   TimeScale
-} from 'chart.js';
-import 'chartjs-adapter-date-fns';
-import { Line } from 'react-chartjs-2';
+} from "chart.js";
+import "chartjs-adapter-date-fns";
+import { Line } from "react-chartjs-2";
+import { usePrefs } from "../prefs";
+import { formatCompactUsd, formatUsd } from "../utils/format";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  TimeScale
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip, TimeScale);
 
-const CryptoPriceChart = ({ prices, graphColor, name }) => {
+// Resolve a theme token (CSS variable holding RGB channels) to a canvas colour
+const token = (name, alpha = 1) => `rgb(${getComputedStyle(document.documentElement).getPropertyValue(`--${name}`).trim()} / ${alpha})`;
+
+const CryptoPriceChart = ({ prices, name }) => {
+  const { theme } = usePrefs(); // re-render on theme change so token() re-reads the variables
+  const first = prices[0]?.[1];
+  const last = prices[prices.length - 1]?.[1];
+  const trendName = last >= first ? "positive" : "negative";
+  const lineColor = token(trendName);
+  const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   const chartData = {
-    datasets: [{
-      label: 'Price (USD)',
-      data: prices.map(([timestamp, price]) => ({
-        x: timestamp,
-        y: price
-      })),
-      borderColor: graphColor,
-      tension: 0.1
-    }]
+    datasets: [
+      {
+        label: "USD",
+        data: prices.map(([timestamp, price]) => ({ x: timestamp, y: price })),
+        borderColor: lineColor,
+        borderWidth: 2,
+        tension: 0.35,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: lineColor,
+        fill: true,
+        // Gradient fades the trend colour into the card background
+        backgroundColor: ({ chart }) => {
+          const { ctx, chartArea } = chart;
+          if (!chartArea) return "transparent";
+          const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+          gradient.addColorStop(0, token(trendName, 0.3));
+          gradient.addColorStop(1, token(trendName, 0));
+          return gradient;
+        }
+      }
+    ]
   };
 
   const options = {
-    animation: !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    animation: isReducedMotion ? false : { duration: 600 },
     responsive: true,
-		maintainAspectRatio: false,
-		plugins: {
-			legend: {
-				display: false
-			}
-		},
+    maintainAspectRatio: false,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        displayColors: false,
+        backgroundColor: token("ink"),
+        titleColor: token("page"),
+        bodyColor: token("page"),
+        padding: 10,
+        cornerRadius: 10,
+        callbacks: { label: (item) => formatUsd(item.parsed.y) }
+      }
+    },
     scales: {
       x: {
-        type: 'time',
-        time: {
-          unit: 'day'
-        }
+        type: "time",
+        time: { unit: "day", tooltipFormat: "PP", displayFormats: { day: "MMM d" } },
+        grid: { display: false },
+        border: { display: false },
+        ticks: { color: token("subtle"), maxTicksLimit: 6, maxRotation: 0 }
       },
       y: {
-        beginAtZero: false
+        beginAtZero: false,
+        grid: { color: token("line", 0.6) },
+        border: { display: false },
+        ticks: { color: token("subtle"), maxTicksLimit: 5, callback: (value) => formatCompactUsd(value) }
       }
     }
   };
 
-  const first = prices[0]?.[1];
-  const last = prices[prices.length - 1]?.[1];
-  const summary = `${name} price history in USD, from ${first} to ${last}`;
-
-  return <Line role="img" aria-label={summary} data={chartData} options={options} style={{ height: '100%', width: '100%' }} />;
+  return (
+    <Line
+      key={theme}
+      role="img"
+      aria-label={`${name} price history in USD, from ${first} to ${last}`}
+      data={chartData}
+      options={options}
+      style={{ height: "100%", width: "100%" }}
+    />
+  );
 };
 
 export default CryptoPriceChart;

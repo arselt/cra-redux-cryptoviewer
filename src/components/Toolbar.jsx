@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { SORT_OPTIONS } from "../utils/cryptos";
 
-const CONTROL = "rounded-xl border border-line bg-card px-3 py-2 text-ink min-h-10";
+const CONTROL = "rounded-xl placeholder:text-subtle border border-line bg-card px-3 py-2 text-ink min-h-10";
 
 const Toolbar = ({ query, onQueryChange, sortKey, onSortChange, onRefresh, isLoading, updatedAt, shown, total }) => {
   const searchId = useId();
