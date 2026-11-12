@@ -1,9 +1,10 @@
-import { SET_CRYPTOS, SET_CRYPTO_DETAILS, SET_FAVORITE, SET_LOADING } from "../actions/types";
+import { SET_CRYPTOS, SET_CRYPTO_DETAILS, SET_ERROR, SET_FAVORITE, SET_LOADING } from "../actions/types";
 
 const initialState = {
   cryptos: [],
   cryptoDetails: {},
-  loading: false
+  loading: false,
+  error: null
 };
 
 export const cryptosReducer = (state = initialState, action) => {
@@ -37,6 +38,8 @@ export const cryptosReducer = (state = initialState, action) => {
     
       return { ...state, cryptos: newCryptosList };
     }      
+    case SET_ERROR:
+      return { ...state, error: action.payload };
     case SET_LOADING:
       return { ...state, loading: action.payload };
     default:

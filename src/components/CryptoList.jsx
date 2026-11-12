@@ -1,13 +1,11 @@
 import { useId } from "react";
 import CryptoCard from "./CryptoCard";
 
-import { useSelector } from "react-redux";
-
 import Skeleton from "react-loading-skeleton";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
-const CryptoList = ({ cryptos, title }) => {
-  const loading = useSelector((state) => state.cryptos.loading);
+const CryptoList = ({ cryptos, title, isLoading = false }) => {
+  const loading = isLoading;
 
   const headingId = useId();
   return (
@@ -35,6 +33,7 @@ const CryptoList = ({ cryptos, title }) => {
                   cryptoChangeDay={cryptos.price_change_percentage_24h}
                   cryptoImage={cryptos.image}
                   cryptoFavorite={cryptos.favorite}
+                  crypto={cryptos}
                 />
               );
             })}

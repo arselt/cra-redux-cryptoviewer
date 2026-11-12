@@ -10,7 +10,9 @@ Run `pnpm dev` and check each item after any UI change. Update this file when a 
 
 ## Flows
 - [ ] First load shows skeletons, then the list (loading)
-- [ ] Offline / API failure leaves the page usable (error)
+- [ ] API failure shows an alert with "Try again"; cached coins stay visible; retry recovers
+- [ ] Search filters by name/symbol, sort reorders, "No coins match" shows when empty
+- [ ] Expanded card shows stats; 7D/30D/90D switch the chart; chart error offers retry
 - [ ] Marking a favorite adds it to the Favorites section; unmarking removes it; reload keeps it
 - [ ] Prices show as currency ($2,040.83), sub-dollar coins keep more decimals; long names truncate with ellipsis
 - [ ] Expanding a card shows its chart; collapsing hides it

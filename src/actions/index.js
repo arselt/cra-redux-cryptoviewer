@@ -1,4 +1,4 @@
-import { SET_CRYPTOS, SET_CRYPTO_DETAILS, SET_FAVORITE, SET_LOADING } from "./types";
+import { SET_CRYPTOS, SET_CRYPTO_DETAILS, SET_ERROR, SET_FAVORITE, SET_LOADING } from "./types";
 
 export const setCryptos = (payload) => ({
   type: SET_CRYPTOS,
@@ -20,5 +20,10 @@ export const setFavorite = (payload) => ({
 
 export const setLoading = (payload) => ({
   type: SET_LOADING,
+  payload
+});
+
+export const setError = (payload) => ({
+  type: SET_ERROR,
   payload
 });
