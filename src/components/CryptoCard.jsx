@@ -28,11 +28,13 @@ const CryptoCard = ({
   cryptoChangeDay == null || undefined ? cryptoChangeDay = 0: cryptoChangeDay;
   
   return (
-    <article className="break-inside-avoid-column bg-zinc-200 flex flex-wrap w-full md:max-w-sm rounded-2xl shadow-xl mb-6 mx-auto mx-2">
+    <article className="break-inside-avoid-column bg-zinc-200 flex flex-wrap w-full md:max-w-sm rounded-2xl shadow-xl mb-4 mx-auto mx-2">
       <div className="flex items-center justify-between w-full h-20 shadow-lg rounded-2xl px-2">
         <div className="flex items-center">
           <img src={cryptoImage} alt="" className="w-6 h-6" loading="lazy"/>
-          <h3 className="text-2xl capitalize ml-2">{cryptoName}</h3>
+          <h3 className="text-2xl capitalize mx-2">{
+            cryptoName.length >= 27 ? cryptoName.substring(0, 27)+"..." : cryptoName
+          }</h3>
         </div>
         <div className="flex items-center text-end">
           <div className="flex flex-col mr-2">

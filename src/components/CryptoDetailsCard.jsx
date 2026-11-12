@@ -28,7 +28,7 @@ const CryptoDetailsCard = ({ cryptoId }) => {
 
   return (
     <SkeletonTheme baseColor="#f4f4f5" highlightColor="#fafafa">
-      <div className="flex w-full h-[228px] p-4">
+      <div className="flex w-full h-[210px] p-4">
         <div className="w-full h-full">
           {cryptoDetails ? (
             <Suspense fallback={<SkeletonLoader />}>
